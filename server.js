@@ -1,7 +1,9 @@
 var express = require('express'),
     path = require('path'),
     http = require('http'),
+
     wine = require('./routes/wines');
+    patient = require('./routes/patients');
 
 var app = express();
 
@@ -22,6 +24,13 @@ app.get('/wines/:id', wine.findById);
 app.post('/wines', wine.addWine);
 app.put('/wines/:id', wine.updateWine);
 app.delete('/wines/:id', wine.deleteWine);
+
+
+app.get('/patients', patient.findAll);
+app.get('/patients/:id', patient.findById);
+app.post('/patients', patient.addPatient);
+app.put('/patients/:id', patient.updatePatient);
+app.delete('/patients/:id', patient.deletePatient);
 
 http.createServer(app).listen(app.get('port'), function () {
     console.log("Express server listening on port " + app.get('port'));
